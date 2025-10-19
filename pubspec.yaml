@@ -2,34 +2,27 @@ name: beseech
 description: A new Flutter project.
 publish_to: "none"
 version: 0.1.0
-
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ^3.6.0
 
 dependencies:
   flutter:
     sdk: flutter
-  states_rebuilder: ^6.4.0
+  # states_rebuilder: ^6.4.0
+  forui: ^0.15.1
+  hive_flutter:
   colornames:
   intl:
-  flex_color_scheme: ^7.3.1
-  clay_containers: ^0.3.2
-  dots_indicator: ^2.1.2
-  google_fonts: ^5.1.0
+  dots_indicator: ^4.0.1
   cupertino_icons: ^1.0.8
-  objectbox: ^4.0.3
-  objectbox_flutter_libs: ^4.0.3
   flutter_native_splash: ^2.4.1
-  syncfusion_flutter_calendar: ^27.1.53
-  manager:
-    path: ..//manager
-  shadcn_ui: ^0.16.3
-dev_dependencies:
   flutter_launcher_icons: ^0.14.1
-  objectbox_generator: ^4.0.2
-  json_serializable: ^6.7.1
-  freezed: ^2.4.7
-  build_runner: ^2.3.3
+  objectbox: 4.3.0
+  objectbox_flutter_libs: 4.3.0
+  objectbox_generator: 4.3.0
+  build_runner: ^2.4.15
+  navigation_builder: ^0.0.4
+  signals_flutter: ^6.0.2
 flutter:
   uses-material-design: true
   assets:

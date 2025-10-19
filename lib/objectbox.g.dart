@@ -14,49 +14,49 @@ import 'package:objectbox/internal.dart'
 import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'prayers/prayers_repository.dart';
+import 'domain/models/prayer.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
 final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(2, 1611908552585527111),
+      id: const obx_int.IdUid(1, 6627571885472862278),
       name: 'Prayer',
-      lastPropertyId: const obx_int.IdUid(15, 5916518019155973656),
+      lastPropertyId: const obx_int.IdUid(7, 4560165164478585898),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 9183463129663571865),
+            id: const obx_int.IdUid(1, 7640213667564739806),
             name: 'id',
             type: 6,
             flags: 129),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 7290384578982419905),
+            id: const obx_int.IdUid(2, 4845263723064652084),
             name: 'date',
             type: 10,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(10, 1559213794169362780),
+            id: const obx_int.IdUid(3, 3998053616854780326),
             name: 'fajr',
             type: 1,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(11, 700623021453239841),
+            id: const obx_int.IdUid(4, 1900955980189042028),
             name: 'zuhr',
             type: 1,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(12, 1319119370422354446),
+            id: const obx_int.IdUid(5, 4762790071721214595),
             name: 'asr',
             type: 1,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(13, 8517476559596434873),
+            id: const obx_int.IdUid(6, 8782958387276657308),
             name: 'maghrib',
             type: 1,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(14, 8882511266545174739),
+            id: const obx_int.IdUid(7, 4560165164478585898),
             name: 'isha',
             type: 1,
             flags: 0)
@@ -100,98 +100,13 @@ Future<obx.Store> openStore(
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
       entities: _entities,
-      lastEntityId: const obx_int.IdUid(10, 4429997323502268018),
-      lastIndexId: const obx_int.IdUid(1, 9215688344727240864),
+      lastEntityId: const obx_int.IdUid(1, 6627571885472862278),
+      lastIndexId: const obx_int.IdUid(0, 0),
       lastRelationId: const obx_int.IdUid(0, 0),
       lastSequenceId: const obx_int.IdUid(0, 0),
-      retiredEntityUids: const [
-        4130695560144724742,
-        3895409488182306133,
-        1069245397459866280,
-        2049816759605126044,
-        7100622351615616441,
-        3655364613159202369,
-        2210101618476741581,
-        4429997323502268018,
-        1583301767514743206
-      ],
-      retiredIndexUids: const [9215688344727240864],
-      retiredPropertyUids: const [
-        2413967724975647220,
-        6615410633411715462,
-        7370180067285926545,
-        5372308988682409522,
-        910309402904019513,
-        1939376214344949720,
-        7285764085527827783,
-        4180965968025082747,
-        7873139569977170503,
-        2130013873183398716,
-        2121933173089802535,
-        3620090059744650875,
-        1030209404401003225,
-        5591045940773187406,
-        3260907632441289193,
-        8263691411129459720,
-        8268818464649131841,
-        2017114860947457185,
-        159777793608263250,
-        3370895291033049369,
-        6934387153520659697,
-        8633141232366830532,
-        6198415492502327179,
-        2845536320880509985,
-        5589945393532010737,
-        2371904892101418834,
-        8440852676967700079,
-        7430873593600373639,
-        8820730579331702848,
-        4604449029154052118,
-        5495107024318875418,
-        2910178134883606380,
-        8337743811358128228,
-        2525312672376078291,
-        4554670126532465537,
-        1389885920118995957,
-        102568942411570695,
-        4982586763080314642,
-        7675437653984766448,
-        4120790661822834757,
-        518636991892986547,
-        5138112939438898682,
-        828762074508702903,
-        9189354293412406406,
-        1743219797123550753,
-        3875951044528452004,
-        9167676606456916827,
-        4708276607665244343,
-        5522341510247345906,
-        5882644806738244915,
-        3420935649910576056,
-        7798346438030110257,
-        2570337216030840293,
-        3562353556259282769,
-        3721675617123303917,
-        2769249395292769341,
-        4232833378154413932,
-        1502377474437361186,
-        7620230574078431421,
-        7634531900479576942,
-        3577553219342358429,
-        3936915370179387924,
-        3918138383041668776,
-        1405471880331913268,
-        3394451923138089500,
-        2251617673644111958,
-        5509682016024903938,
-        9127612352430029948,
-        1145820688104067486,
-        2224944098909578300,
-        7770561292512933238,
-        6985547457054751607,
-        3397943036262853866,
-        5916518019155973656
-      ],
+      retiredEntityUids: const [],
+      retiredIndexUids: const [],
+      retiredPropertyUids: const [],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -207,14 +122,14 @@ obx_int.ModelDefinition getObjectBoxModel() {
           object.id = id;
         },
         objectToFB: (Prayer object, fb.Builder fbb) {
-          fbb.startTable(16);
+          fbb.startTable(8);
           fbb.addInt64(0, object.id);
           fbb.addInt64(1, object.date.millisecondsSinceEpoch);
-          fbb.addBool(9, object.fajr);
-          fbb.addBool(10, object.zuhr);
-          fbb.addBool(11, object.asr);
-          fbb.addBool(12, object.maghrib);
-          fbb.addBool(13, object.isha);
+          fbb.addBool(2, object.fajr);
+          fbb.addBool(3, object.zuhr);
+          fbb.addBool(4, object.asr);
+          fbb.addBool(5, object.maghrib);
+          fbb.addBool(6, object.isha);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -227,15 +142,15 @@ obx_int.ModelDefinition getObjectBoxModel() {
             ..date = DateTime.fromMillisecondsSinceEpoch(
                 const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0))
             ..fajr =
-                const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 22)
+                const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 8)
             ..zuhr =
-                const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 24)
+                const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 10)
             ..asr =
-                const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 26)
+                const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 12)
             ..maghrib =
-                const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 28)
+                const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 14)
             ..isha =
-                const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 30);
+                const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 16);
 
           return object;
         })

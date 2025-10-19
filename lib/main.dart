@@ -1,77 +1,63 @@
-import 'package:beseech/navigator/navigator_bloc.dart';
+import 'package:beseech/domain/repositories/splash_repository.dart';
 import 'package:beseech/objectbox.g.dart';
-import 'package:beseech/settings/settings_bloc.dart';
-import 'package:beseech/splash/splash_page.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
+import 'package:beseech/ui/splash/splash_page.dart';
+import 'package:beseech/utils/architecture.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:forui/theme.dart';
 
-import 'main.dart';
-
-export 'dart:convert';
-export 'dart:io';
-export 'package:beseech/prayers/remainig_prayers.dart';
-export 'package:beseech/prayers/prayers_page.dart';
-export 'package:beseech/_archived_code/initial_page.dart';
-export 'package:beseech/_archived_code/colors/material_colors_ui.dart';
-export 'package:beseech/settings/settings_page.dart';
-export 'package:clay_containers/clay_containers.dart';
-export 'package:dots_indicator/dots_indicator.dart';
-export 'package:flex_color_scheme/flex_color_scheme.dart';
-export 'package:google_fonts/google_fonts.dart';
-export 'package:manager/manager.dart';
-// export 'package:path_provider/path_provider.dart';
-// export 'package:states_rebuilder/scr/state_management/common/logger.dart';
-export 'package:states_rebuilder/states_rebuilder.dart';
-export 'package:uuid/uuid.dart';
-
-late Store store;
+import 'domain/repositories/prayers_repository.dart';
+import 'domain/repositories/settings_repository.dart';
+import 'utils/navigator.dart';
 
 void main() async {
   FlutterNativeSplash.preserve(
     widgetsBinding: WidgetsFlutterBinding.ensureInitialized(),
   );
-  final appInfo = await PackageInfo.fromPlatform();
-  store = await openStore(
-    directory:
-        '${(await getApplicationDocumentsDirectory()).path}${appInfo.appName}',
+  AppRunner(
+    initialize: () async {
+      /// SERVICES
+      final store = await openStore();
+      find(store);
+
+      /// REPOSITORIES
+      put(SplashRepository());
+      put(SettingsRepository());
+      put(PrayersRepository());
+    },
+    app: App(),
   );
-  await RM.storageInitializer(HiveStorage());
-  runApp(const App());
 }
 
-class App extends UI {
-  const App({super.key});
+class AppBloc extends Bloc {
+  late final SettingsRepository settingsRepository = watch();
+
+  bool get dark => settingsRepository.dark;
   @override
-  void didMountWidget(_) {
+  void initState() {
+    super.initState();
     FlutterNativeSplash.remove();
   }
+}
+
+class App extends UI<AppBloc> {
+  const App({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return ShadApp.material(
+  AppBloc create() => AppBloc();
+
+  @override
+  Widget build(BuildContext context, controller) {
+    FlutterNativeSplash.remove();
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      navigatorKey: navigatorBloc.key,
-      // theme: FlexThemeData.light(
-      //   // scaffoldBackground: color.shade900,
-      //   colors: FlexSchemeColor(
-      //     primary: color,
-      //     secondary: color,
-      //   ),
-      //   useMaterial3: true,
-      // ),
-      // darkTheme: FlexThemeData.dark(
-      //   useMaterial3: true,
-      //   colors: FlexSchemeColor(
-      //     primary: color,
-      //     secondary: Colors.black,
-      //   ),
-      // ),
-      themeMode: settingsBloc.themeMode,
+      navigatorKey: navigator.navigatorKey,
+      builder: (context, child) => FTheme(
+        data: controller.dark ? FThemes.yellow.dark : FThemes.yellow.light,
+        child: child!,
+      ),
+      themeMode: controller.dark ? ThemeMode.dark : ThemeMode.light,
       home: SplashPage(),
     );
   }
-}
-
-void _backgroundImages() {
-  /// TODO - add background images to the app
-  /// TODO - add different colors of themes
 }
