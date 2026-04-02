@@ -1,5 +1,5 @@
 import 'package:beseech/domain/models/prayer.dart';
-import 'package:beseech/domain/repositories/prayers_repository.dart';
+import 'package:beseech/business/prayers_repository.dart';
 import 'package:beseech/ui/settings/informations/informations_page.dart';
 import 'package:beseech/utils/architecture.dart';
 import 'package:flutter/material.dart';

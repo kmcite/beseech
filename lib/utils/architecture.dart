@@ -196,71 +196,71 @@ class _FeatureState<B extends Bloc> extends State<Feature<B>> {
   Widget build(BuildContext context) => widget.builder(context, bloc);
 }
 
-/// Feature with a parameter (family-like scoping via ScopedBloc<P>).
-class FeatureScoped<B extends ScopedBloc<P>, P> extends StatefulWidget {
-  final P param;
-  final B Function() create;
-  final Widget Function(BuildContext context, B bloc, P param) builder;
+// /// Feature with a parameter (family-like scoping via ScopedBloc<P>).
+// class FeatureScoped<B extends ScopedBloc<P>, P> extends StatefulWidget {
+//   final P param;
+//   final B Function() create;
+//   final Widget Function(BuildContext context, B bloc, P param) builder;
 
-  /// If true, reuse the bloc and call setParam on param change.
-  /// If false, recreate the bloc when param changes.
-  final bool reuseOnParamChange;
+//   /// If true, reuse the bloc and call setParam on param change.
+//   /// If false, recreate the bloc when param changes.
+//   final bool reuseOnParamChange;
 
-  const FeatureScoped({
-    super.key,
-    required this.param,
-    required this.create,
-    required this.builder,
-    this.reuseOnParamChange = true,
-  });
+//   const FeatureScoped({
+//     super.key,
+//     required this.param,
+//     required this.create,
+//     required this.builder,
+//     this.reuseOnParamChange = true,
+//   });
 
-  @override
-  State<FeatureScoped<B, P>> createState() => _FeatureScopedState<B, P>();
-}
+//   @override
+//   State<FeatureScoped<B, P>> createState() => _FeatureScopedState<B, P>();
+// }
 
-class _FeatureScopedState<B extends ScopedBloc<P>, P>
-    extends State<FeatureScoped<B, P>> {
-  late B bloc;
-  late VoidCallback _listener;
+// class _FeatureScopedState<B extends ScopedBloc<P>, P>
+//     extends State<FeatureScoped<B, P>> {
+//   late B bloc;
+//   late VoidCallback _listener;
 
-  @override
-  void initState() {
-    super.initState();
-    bloc = widget.create();
-    _listener = () {
-      if (mounted) setState(() {});
-    };
-    bloc.addListener(_listener);
-    bloc.initState();
-  }
+//   @override
+//   void initState() {
+//     super.initState();
+//     bloc = widget.create();
+//     _listener = () {
+//       if (mounted) setState(() {});
+//     };
+//     bloc.addListener(_listener);
+//     bloc.initState();
+//   }
 
-  @override
-  void didUpdateWidget(covariant FeatureScoped<B, P> oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.param != widget.param) {
-      if (widget.reuseOnParamChange) {
-        bloc.setParam(widget.param);
-      } else {
-        bloc.removeListener(_listener);
-        bloc.dispose();
-        bloc = widget.create();
-        bloc.addListener(_listener);
-        bloc.initState();
-      }
-    }
-  }
+//   @override
+//   void didUpdateWidget(covariant FeatureScoped<B, P> oldWidget) {
+//     super.didUpdateWidget(oldWidget);
+//     if (oldWidget.param != widget.param) {
+//       if (widget.reuseOnParamChange) {
+//         bloc.setParam(widget.param);
+//       } else {
+//         bloc.removeListener(_listener);
+//         bloc.dispose();
+//         bloc = widget.create();
+//         bloc.addListener(_listener);
+//         bloc.initState();
+//       }
+//     }
+//   }
 
-  @override
-  void dispose() {
-    bloc.removeListener(_listener);
-    bloc.dispose();
-    super.dispose();
-  }
+//   @override
+//   void dispose() {
+//     bloc.removeListener(_listener);
+//     bloc.dispose();
+//     super.dispose();
+//   }
 
-  @override
-  Widget build(BuildContext context) =>
-      widget.builder(context, bloc, widget.param);
-}
+//   @override
+//   Widget build(BuildContext context) =>
+//       widget.builder(context, bloc, widget.param);
+// }
 
 abstract class UI<B extends Bloc> extends StatefulWidget {
   const UI({super.key});

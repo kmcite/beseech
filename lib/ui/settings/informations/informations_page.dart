@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:intl/intl.dart';
 
-import '../../../domain/repositories/user_repository.dart';
+import '../../../business/user_repository.dart';
 import '../../../utils/architecture.dart';
 
 class InformationBloc extends Bloc {
@@ -31,8 +31,10 @@ class InformationsPage extends UI<InformationBloc> {
         children: [
           Text('NAME'),
           FTextField(
-            initialText: controller.name(),
-            onChange: controller.name,
+            control: FTextFieldControl.managed(
+              initial: TextEditingValue(text: controller.name()),
+              onChange: (value) => controller.name(value.text),
+            ),
             onSubmit: (_) => controller.editing(false),
             maxLines: null,
           ),

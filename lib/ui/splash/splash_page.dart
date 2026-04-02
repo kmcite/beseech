@@ -1,5 +1,5 @@
 import 'package:beseech/ui/prayers/prayers_page.dart';
-import 'package:beseech/domain/repositories/splash_repository.dart';
+import 'package:beseech/business/splash_repository.dart';
 import 'package:beseech/utils/architecture.dart';
 import 'package:beseech/utils/navigator.dart';
 
@@ -17,7 +17,7 @@ class SplashBloc extends Bloc {
   bool get initialized => splashRepository.initialized;
 
   void initialize() {
-    splashRepository.initialize();
+    // splashRepository.initialize();
     navigator.to(PrayersPage());
   }
 
@@ -40,11 +40,11 @@ class SplashBloc extends Bloc {
   }
 }
 
-class SplashPage extends UI<SplashBloc> {
+class SplashPage extends StatelessWidget {
+  // @override
+  // SplashBloc create() => SplashBloc();
   @override
-  SplashBloc create() => SplashBloc();
-  @override
-  Widget build(BuildContext context, controller) {
+  Widget build(BuildContext context) {
     return FScaffold(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

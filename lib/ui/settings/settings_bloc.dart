@@ -1,12 +1,13 @@
-import 'package:beseech/domain/repositories/user_repository.dart';
+import 'package:beseech/business/user_repository.dart';
 import 'package:beseech/utils/architecture.dart';
 import 'package:beseech/utils/navigator.dart';
-import 'package:beseech/domain/repositories/settings_repository.dart';
+import 'package:beseech/business/settings_repository.dart';
 import 'package:beseech/ui/splash/splash_page.dart';
-import 'package:beseech/domain/repositories/splash_repository.dart';
+import 'package:beseech/business/splash_repository.dart';
 
 class SettingsBloc extends Bloc {
   late SettingsRepository settingsRepository = watch();
+  // ignore: unused_element
   SplashRepository get _splashRepository => splashRepository;
   NavigatorRepository get _navigatorRepository => navigator;
   // PrayersRepository get _prayersRepository => prayersRepository;
@@ -39,7 +40,7 @@ class SettingsBloc extends Bloc {
   // }
 
   void restoreApp() {
-    _splashRepository.deInitialize();
+    // _splashRepository.deInitialize();
     // _prayersRepository.removeAll();
     _userRepository.resetUser();
     _navigatorRepository.toAndRemoveUntil(SplashPage());

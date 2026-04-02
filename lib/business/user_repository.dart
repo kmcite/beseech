@@ -1,7 +1,7 @@
 import 'package:beseech/utils/navigator.dart';
 import 'package:flutter/material.dart';
 
-import '../../utils/architecture.dart';
+import '../utils/architecture.dart';
 
 class UserRepository extends Repository {
   User user = User();

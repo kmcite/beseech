@@ -1,8 +1,13 @@
 import 'dart:developer';
 
+import 'package:beseech/business/business.dart';
 import 'package:beseech/domain/models/prayer.dart';
+import 'package:beseech/domain/services/objects_service.dart';
 import 'package:beseech/utils/architecture.dart';
+import 'package:fountain/fountain.dart';
 import 'package:objectbox/objectbox.dart';
+
+enum PrayerTypes { fajr, zuhr, asr, maghrib, isha, eid, jumma }
 
 class PrayersRepository extends Repository {
   final _store = find<Store>();
@@ -52,4 +57,18 @@ bool? statusPrayer(PrayerStatus value) {
     PrayerStatus.notPrayed => false,
     PrayerStatus.awaiting => null,
   };
+}
+
+class AddPrayerAction extends Action<Business> {
+  Prayer prayer;
+  AddPrayerAction(this.prayer);
+  @override
+  Stream<Updater<Business>> call(Context<Business> context) async* {
+    final service = context.services.create<ObjectsService>();
+    await service.put(prayer);
+    final prayers = await service.getAll<Prayer>();
+    yield (state) {
+      return state..prayers = prayers;
+    };
+  }
 }

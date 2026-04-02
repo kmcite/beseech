@@ -46,10 +46,73 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:1373856387916349707",
+      "lastPropertyId": "2:2091067516747115781",
+      "name": "DailyPrayerSheetEntity",
+      "properties": [
+        {
+          "id": "1:2194198058651609126",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2091067516747115781",
+          "name": "date",
+          "indexId": "1:8050568510476069810",
+          "type": 10,
+          "flags": 40
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:3319601026333056571",
+      "lastPropertyId": "6:3576496691346540908",
+      "name": "PrayerEntryEntity",
+      "properties": [
+        {
+          "id": "1:939150171667678631",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8604584290292526724",
+          "name": "date",
+          "type": 10
+        },
+        {
+          "id": "3:3410272951839116426",
+          "name": "type",
+          "type": 9
+        },
+        {
+          "id": "4:7980843720608064425",
+          "name": "prayed",
+          "type": 1
+        },
+        {
+          "id": "5:3941933069777627455",
+          "name": "markedAt",
+          "type": 10
+        },
+        {
+          "id": "6:3576496691346540908",
+          "name": "dailyPrayerId",
+          "indexId": "2:2476369266352681391",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "DailyPrayerSheetEntity"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:6627571885472862278",
-  "lastIndexId": "0:0",
+  "lastEntityId": "3:3319601026333056571",
+  "lastIndexId": "2:2476369266352681391",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

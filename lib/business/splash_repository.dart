@@ -22,17 +22,17 @@ class SplashRepository extends Repository {
 
   /// Checking Initialized
 
-  bool initialized = false;
+  bool get initialized => timer != null;
 
-  void setInitialized(bool value) {
-    initialized = value;
-  }
+  // void setInitialized(bool value) {
+  //   initialized = value;
+  // }
 
-  void initialize() {
-    setInitialized(true);
-  }
+  // void initialize() {
+  //   setInitialized(true);
+  // }
 
-  void deInitialize() {
-    setInitialized(false);
-  }
+  // void deInitialize() {
+  //   setInitialized(false);
+  // }
 }

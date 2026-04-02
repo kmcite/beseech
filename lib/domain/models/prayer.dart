@@ -1,4 +1,4 @@
-import 'package:beseech/domain/repositories/prayers_repository.dart';
+import 'package:beseech/business/prayers_repository.dart';
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
@@ -13,8 +13,6 @@ class Prayer {
   bool? asr;
   bool? maghrib;
   bool? isha;
-  Prayer();
-  Prayer.fromJson(Map<String, dynamic> json);
 
   PrayerStatus get fajrStatus => prayerStatus(fajr);
   set fajrStatus(PrayerStatus status) => fajr = statusPrayer(status);

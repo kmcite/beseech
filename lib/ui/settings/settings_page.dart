@@ -1,18 +1,16 @@
-import 'package:beseech/ui/settings/settings_bloc.dart';
+import 'package:beseech/business/settings_repository.dart';
+import 'package:beseech/utils/extensions.dart';
 import 'package:beseech/utils/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'package:fountain/fountain.dart';
 
-import '../../utils/architecture.dart';
-
-class SettingsPage extends UI<SettingsBloc> {
-  @override
-  SettingsBloc create() => SettingsBloc();
-
+class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   @override
-  Widget build(context, controller) {
+  Widget build(context) {
+    final dark = context.on((state) => state.dark);
     return FScaffold(
       header: FHeader.nested(
         prefixes: [
@@ -33,8 +31,10 @@ class SettingsPage extends UI<SettingsBloc> {
               Expanded(
                 child: FButton(
                   prefix: Icon(ThemeMode.light.icon),
-                  onPress: controller.dark
-                      ? () => controller.settingsRepository.toggle()
+                  onPress: dark
+                      ? () {
+                          context.apply(DarkToggledAction());
+                        }
                       : null,
                   child: ThemeMode.light.name.toUpperCase().text(),
                 ),
@@ -42,18 +42,20 @@ class SettingsPage extends UI<SettingsBloc> {
               Expanded(
                 child: FButton(
                   prefix: Icon(ThemeMode.dark.icon),
-                  onPress: controller.dark
+                  onPress: dark
                       ? null
-                      : () => controller.settingsRepository.toggle(),
+                      : () {
+                          context.apply(DarkToggledAction());
+                        },
                   child: ThemeMode.dark.name.toUpperCase().text(),
                 ),
               ),
             ],
           ),
           FButton(
-            style: FButtonStyle.destructive(),
+            // style: FButtonStyle.destructive(),
             onPress: () async {
-              final shouldRestore = await navigator.dialog<bool>(
+              final _ = await navigator.dialog<bool>(
                 Dialog(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -101,7 +103,7 @@ class SettingsPage extends UI<SettingsBloc> {
                   ),
                 ),
               );
-              if (shouldRestore == true) controller.restoreApp();
+              // if (shouldRestore == true) controller.restoreApp();
             },
             child: Text('RESET APPLICATION'),
           ),
