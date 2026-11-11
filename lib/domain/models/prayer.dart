@@ -1,13 +1,20 @@
-import 'package:beseech/business/prayers_repository.dart';
-import 'package:objectbox/objectbox.dart';
+import 'package:beseech/domain/models/prayer_status.dart';
+import 'package:shared_database/shared_database.dart';
 
-@Entity()
 class Prayer {
-  @Id(assignable: true)
-  int id = 0;
-  DateTime date = DateTime.now();
+  Prayer({
+    this.id,
+    DateTime? date,
+    this.fajr,
+    this.zuhr,
+    this.asr,
+    this.maghrib,
+    this.isha,
+  }) : date = date ?? DateTime.now();
 
-  /// initialized with null -> awaiting
+  String? id;
+  DateTime date;
+
   bool? fajr;
   bool? zuhr;
   bool? asr;
@@ -25,13 +32,30 @@ class Prayer {
   PrayerStatus get ishaStatus => prayerStatus(isha);
   set ishaStatus(PrayerStatus status) => isha = statusPrayer(status);
 
-  @override
-  String toString() {
-    return 'Prayer{id: $id, date: $date, fajr: $fajr, zuhr: $zuhr, asr: $asr, maghrib: $maghrib, isha: $isha';
+  factory Prayer.fromRecord(SharedRecord record) {
+    final data = record.data;
+    return Prayer(
+      id: record.id,
+      date: DateTime.parse(data['date'] as String),
+      fajr: data['fajr'] as bool?,
+      zuhr: data['zuhr'] as bool?,
+      asr: data['asr'] as bool?,
+      maghrib: data['maghrib'] as bool?,
+      isha: data['isha'] as bool?,
+    );
   }
 
+  Map<String, dynamic> toJson() => {
+        'date': DateTime(date.year, date.month, date.day).toIso8601String(),
+        'fajr': fajr,
+        'zuhr': zuhr,
+        'asr': asr,
+        'maghrib': maghrib,
+        'isha': isha,
+      };
+
   int get awaitingCount {
-    int count = 0;
+    var count = 0;
     if (fajr == null) count++;
     if (zuhr == null) count++;
     if (asr == null) count++;
@@ -41,7 +65,7 @@ class Prayer {
   }
 
   int get adaCount {
-    int count = 0;
+    var count = 0;
     if (fajr == true) count++;
     if (zuhr == true) count++;
     if (asr == true) count++;
@@ -51,7 +75,7 @@ class Prayer {
   }
 
   int get qazaCount {
-    int count = 0;
+    var count = 0;
     if (fajr == false) count++;
     if (zuhr == false) count++;
     if (asr == false) count++;
@@ -59,4 +83,8 @@ class Prayer {
     if (isha == false) count++;
     return count;
   }
+
+  @override
+  String toString() =>
+      'Prayer{id: $id, date: $date, fajr: $fajr, zuhr: $zuhr, asr: $asr, maghrib: $maghrib, isha: $isha}';
 }
